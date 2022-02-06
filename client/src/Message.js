@@ -1,4 +1,6 @@
-function Message ({msg, uID}) {
+import React, { useState, useEffect } from 'react';
+
+const Message = ({msg, uID}) => {
     const {author, message, time} = msg;
 
     return (
@@ -8,7 +10,7 @@ function Message ({msg, uID}) {
                     <span className="img-letter">{ author.slice(0, 1).toUpperCase() }</span>
                 </div>
             </div>
-            <div className="message-p">
+            <div className={"message-p"}>
                 <p className={uID === msg.uID ? "message message-user m-0" : "message m-0"}>
                     { message }
                     <small>{author} - {time}</small>

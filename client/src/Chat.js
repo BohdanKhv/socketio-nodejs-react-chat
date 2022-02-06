@@ -5,6 +5,7 @@ const Chat = ({socket, username, room, uID}) => {
 
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
+    const [usersCount, setUsersCount] = useState(0);
     const bottom = useRef()
 
     const sendMessage = async (e) => {
@@ -27,6 +28,9 @@ const Chat = ({socket, username, room, uID}) => {
         socket.on('receive_message', (data) => {
             setMessages((list) => [...list, data])
         })
+        socket.on('users_in_room_count', (usersCount) => {
+            setUsersCount(usersCount)
+        })
     }, [socket]);
 
     useEffect(() => {
@@ -36,7 +40,7 @@ const Chat = ({socket, username, room, uID}) => {
     return (
         <div>
             <div className="header"> 
-                <h6>&#128512; Room: { room }</h6>
+                <h6>&#128512; Room: { room } | <small>Online: {usersCount}</small></h6>
                 <button onClick={() => { window.location.reload() }} className="btn-outline">Quit</button>
             </div>
             <div className="main">
@@ -47,20 +51,20 @@ const Chat = ({socket, username, room, uID}) => {
                         ref={ref => bottom.current = ref}>
                     </div>
                 </div>
-                <div className="form">
-                    <input 
-                        className="text-input" 
-                        onChange={(e) => setMessage(e.target.value)} 
-                        value={message} 
-                        ype="text" 
-                        placeholder="Message &#x1F447; &#x1F447; &#x1F447;"
-                        onKeyPress={(e) => { e.key === "Enter" && sendMessage() }}
-                    />
-                    <button 
-                        className="btn-input" 
-                        onClick={ sendMessage }
-                    >&#128036;</button>
-                </div>
+            </div>
+            <div className="form">
+                <input 
+                    className="text-input" 
+                    onChange={(e) => setMessage(e.target.value)} 
+                    value={message} 
+                    ype="text" 
+                    placeholder="Message &#x1F447; &#x1F447; &#x1F447;"
+                    onKeyPress={(e) => { e.key === "Enter" && sendMessage() }}
+                />
+                <button 
+                    className="btn-input" 
+                    onClick={ sendMessage }
+                >&#128036;</button>
             </div>
         </div>
     )
