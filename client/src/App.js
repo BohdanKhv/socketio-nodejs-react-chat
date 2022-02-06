@@ -4,7 +4,7 @@ import Chat from './Chat';
 import SignIn from './SignIn';
 import './style.css'
 
-const socket = io.connect('http://localhost:3001')
+const socket = io.connect('https://woh-chat-app.herokuapp.com')
 
 function App() {
   const [username, setUsername] = useState('')
