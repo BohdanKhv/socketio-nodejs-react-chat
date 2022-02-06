@@ -44,12 +44,10 @@ const Chat = ({socket, username, room, uID}) => {
                 <button onClick={() => { window.location.reload() }} className="btn-outline">Quit</button>
             </div>
             <div className="main">
-                <div className="container">
-                    {messages.length !== 0 && messages.map(msg => <Message key={msg.time + msg.author + Math.random() } msg={msg} uID={uID}/>)}
-                    
-                    <div style={{ float:"left", clear: "both" }}
-                        ref={ref => bottom.current = ref}>
-                    </div>
+                {messages.length !== 0 && messages.map(msg => <Message key={msg.time + msg.author + Math.random() } msg={msg} uID={uID}/>)}
+                
+                <div style={{ float:"left", clear: "both", height: "10px" }}
+                    ref={ref => bottom.current = ref}>
                 </div>
             </div>
             <div className="form">
