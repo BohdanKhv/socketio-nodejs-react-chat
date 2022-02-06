@@ -67,6 +67,6 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-server.listen(3001, () => {
+server.listen(process.env.PORT || 3001, () => {
     console.log("Server is runnig")
 })
